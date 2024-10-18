@@ -4,6 +4,9 @@ import BaseNotification  from "@/components/BaseNotification.vue";
 
 <template>
   <main>
+    <BaseNotification type="Danger"/>
+    <BaseNotification type="Success"/>
+    <BaseNotification type="Warning"/>
     <BaseNotification type="Info"/>
   </main>
 </template>

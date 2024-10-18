@@ -1,10 +1,17 @@
 <script setup>
+import { defineProps } from 'vue';
+const props = defineProps({
+  type: String,
+});
 </script>
 
 <template>
-  <div class="notification">
+  <div :class="['notification', type]">
     <div class="modal_header">
-      <img src="../assets/icons/CheckCircle.svg"  alt="info" />
+      <img src="../assets/icons/CheckCircle.svg"  alt="check" v-if="type === 'Success'"/>
+      <img src="../assets/icons/Info.svg" alt="info" v-if="type === 'Info'"/>
+      <img src="../assets/icons/Warning.svg" alt="warning" v-if="type === 'Warning'"/>
+      <img src="../assets/icons/Danger.svg" alt="Danger" v-if="type === 'Danger'"/>
       <h1>Modal Window</h1>
       <img src="../assets/icons/Close.svg" alt="close" class="close"/>
     </div>
@@ -28,8 +35,28 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+
+}
+
+
+.Danger {
+  background-color: var(--red-light);
+  border: 2px solid var(--red-dark);
+}
+
+.Success {
   background-color: var(--green-light);
   border: 2px solid var(--green-dark);
+}
+
+.Warning {
+  background-color: var(--yellow-light);
+  border: 2px solid var(--yellow-dark);
+}
+
+.Info {
+  background-color: var(--blue-light);
+  border: 2px solid var(--blue-dark);
 }
 
 
