@@ -1,31 +1,34 @@
 <script setup>
 import BaseNotification  from "@/components/BaseNotification.vue";
+import { useNotificationStore } from '@/stores/notifications'; // Import the store
+import { computed } from "vue";
 import { ref } from "vue";
 
-var notifications = ref([
-  { type: "Success"},
-  { type: "Danger"},
-  { type: "Warning"},
-  { type: "Info"}]);
+const notificationStore = useNotificationStore();
 
-function addNotification(type) {
-  if (notifications.value.length >= 5) {
-    notifications.value.shift(); // Remove the oldest notification
-  }
-  notifications.value.push({type: type});
-}
+const notifications = computed(() => notificationStore.getAllNotifications());
+
+const createNotification = (type) => {
+  notificationStore.createNotification(type);
+};
+
+const deleteNotification = (id) => {
+  notificationStore.deleteNotification(id);
+};
+
+
 </script>
 
 <template>
   <main>
     <div class="buttons_container">
-      <button @click="addNotification('Success')">Success</button>
-      <button @click="addNotification('Danger')">Danger</button>
-      <button @click="addNotification('Warning')">Warning</button>
-      <button @click="addNotification('Info')">Info</button>
+      <button @click="createNotification('Success')">Success</button>
+      <button @click="createNotification('Danger')">Danger</button>
+      <button @click="createNotification('Warning')">Warning</button>
+      <button @click="createNotification('Info')">Info</button>
     </div>
     <div class="notifications_container">
-      <BaseNotification v-for="notification in notifications" :key="notification" :type="notification.type" @close="notifications.splice(notifications.indexOf(notification), 1)"/>
+      <BaseNotification v-for="notification in notifications" :key="notification" :type="notification.type" @close="deleteNotification(notification.id)"/>
     </div>
   </main>
 </template>

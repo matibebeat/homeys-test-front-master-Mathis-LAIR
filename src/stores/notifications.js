@@ -1,30 +1,37 @@
-import {defineStore} from "pinia";
+// stores/notification.js
+import { defineStore } from 'pinia';
+import { ref } from 'vue';
 
-export const useNotificationsStore = defineStore({
-    id: 'notifications',
-    state: () => ({
-        notifications: [{ type: "Success"},
-            { type: "Danger"},
-            { type: "Warning"},
-            { type: "Info"}]
-    }),
-    actions: {
-        addNotification(notification) {
-            if (this.notifications.length > 5) {
-                this.notifications.shift()
-            }
-            this.notifications.push(notification)
-        },
-        removeNotification(notification) {
-            this.notifications = this.notifications.filter(n => n !== notification)
+export const useNotificationStore = defineStore('notification', () => {
+    const notifications = ref([]);
+
+    // Actions
+    function createNotification(type) {
+        const id = Date.now();
+        if( notifications.value.length >= 5){
+            notifications.value.shift();
         }
-    },
-    getters: {
-        allNotifications() {
-            return this.notifications;
-        },
-        getNotificationById: (state) => (id) => {
-            return state.notifications.find(notification => notification.id === id);
-        }
-        }
-    })
+        notifications.value.push({ id, type });
+    }
+
+    function deleteNotification(id) {
+        notifications.value = notifications.value.filter(n => n.id !== id);
+    }
+
+    // Getters
+    function getAllNotifications() {
+        return notifications.value;
+    }
+
+    function getNotificationById(id) {
+        return notifications.value.find(n => n.id === id);
+    }
+
+    return {
+        notifications,
+        createNotification,
+        deleteNotification,
+        getAllNotifications,
+        getNotificationById,
+    };
+});
