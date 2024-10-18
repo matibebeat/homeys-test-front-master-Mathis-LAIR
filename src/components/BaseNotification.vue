@@ -13,7 +13,7 @@ const props = defineProps({
       <img src="../assets/icons/Warning.svg" alt="warning" v-if="type === 'Warning'"/>
       <img src="../assets/icons/Danger.svg" alt="Danger" v-if="type === 'Danger'"/>
       <h1>Modal Window</h1>
-      <img src="../assets/icons/Close.svg" alt="close" class="close"/>
+      <img src="../assets/icons/Close.svg" alt="close" class="close" @click="$emit('close')"/>
     </div>
     <p>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis, lectus magna fringilla urna, porttitor
