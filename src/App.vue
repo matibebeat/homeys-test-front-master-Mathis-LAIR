@@ -2,23 +2,30 @@
 import BaseNotification  from "@/components/BaseNotification.vue";
 import { ref } from "vue";
 
-const notifications = ref([
+var notifications = ref([
   { type: "Success"},
   { type: "Danger"},
   { type: "Warning"},
   { type: "Info"}]);
+
+function addNotification(type) {
+  if (notifications.value.length >= 5) {
+    notifications.value.shift(); // Remove the oldest notification
+  }
+  notifications.value.push({type: type});
+}
 </script>
 
 <template>
   <main>
     <div class="buttons_container">
-      <button @click="notifications.push({ type: 'Success'})">Success</button>
-      <button @click="notifications.push({ type: 'Danger'})">Danger</button>
-      <button @click="notifications.push({ type: 'Warning'})">Warning</button>
-      <button @click="notifications.push({ type: 'Info'})">Info</button>
+      <button @click="addNotification('Success')">Success</button>
+      <button @click="addNotification('Danger')">Danger</button>
+      <button @click="addNotification('Warning')">Warning</button>
+      <button @click="addNotification('Info')">Info</button>
     </div>
     <div class="notifications_container">
-      <BaseNotification v-for="notification in notifications" :key="notification.type" :type="notification.type" @close="notifications.splice(notifications.indexOf(notification), 1)"/>
+      <BaseNotification v-for="notification in notifications" :key="notification" :type="notification.type" @close="notifications.splice(notifications.indexOf(notification), 1)"/>
     </div>
   </main>
 </template>
