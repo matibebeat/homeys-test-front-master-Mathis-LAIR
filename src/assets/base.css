@@ -84,3 +84,18 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+:root{
+  --red-dark: #D29393;
+  --green-dark: #89B291;
+  --blue-dark: #96A8D8;
+  --yellow-dark: #D4C296;
+
+  --red-light: #F7E4E4;
+  --green-light: #E4F7E8;
+  --blue-light: #E4E9F7;
+  --yellow-light: #F7F2E4;
+
+  --black: #424242;
+  --black-light: #757575;
+}

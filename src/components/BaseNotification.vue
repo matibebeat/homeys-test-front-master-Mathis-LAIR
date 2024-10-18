@@ -1,19 +1,10 @@
 <script setup>
-const props = defineProps({
-  type: String,
-});
-
-
-
 </script>
 
 <template>
-  <div :class="['notification', type]">
+  <div class="notification">
     <div class="modal_header">
-      <img src="../assets/icons/Danger.svg" v-if="type === 'Danger'" alt="danger" />
-      <img src="../assets/icons/Success.svg" v-if="type === 'Success'" alt="success" />
-      <img src="../assets/icons/Warning.svg" v-if="type === 'Warning'" alt="warning" />
-      <img src="../assets/icons/Info.svg" v-if="type === 'Info'" alt="info" />
+      <img src="../assets/icons/CheckCircle.svg"  alt="info" />
       <h1>Modal Window</h1>
       <img src="../assets/icons/Close.svg" alt="close" class="close"/>
     </div>
@@ -37,27 +28,10 @@ const props = defineProps({
   display: flex;
   flex-direction: column;
   gap: 8px;
-}
-
-.Danger {
-  background-color: var(--red-light);
-  border: 2px solid var(--red-dark);
-}
-
-.Success {
   background-color: var(--green-light);
   border: 2px solid var(--green-dark);
 }
 
-.Warning {
-  background-color: var(--yellow-light);
-  border: 2px solid var(--yellow-dark);
-}
-
-.Info {
-  background-color: var(--blue-light);
-  border: 2px solid var(--blue-dark);
-}
 
 .modal_header {
   display: flex;
